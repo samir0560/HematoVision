@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error {{ error_code }} - HematoVision</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 40px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 4em;
+            font-weight: 300;
+        }
+        .header h2 {
+            margin: 10px 0 0;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .content {
+            padding: 40px;
+        }
+        .error-message {
+            font-size: 1.2em;
+            color: #666;
+            margin: 20px 0;
+        }
+        .btn {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(75, 108, 183, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ error_code }}</h1>
+            <h2>Something went wrong!</h2>
+            <nav class="navigation">
+                <a href="/" class="nav-btn">🏠 Home</a>
+                <a href="/about" class="nav-btn">ℹ️ About</a>
+            </nav>
+        </div>
+        
+        <div class="content">
+            <div class="error-message">
+                <p>{{ error_message }}</p>
+            </div>
+            
+            <div>
+                <a href="/" class="btn">🏠 Home</a>
+                <a href="/predict" class="btn">🔍 Try Again</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

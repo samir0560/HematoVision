@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HematoVision - Blood Cell Classification</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 20px;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .content {
+            padding: 40px;
+        }
+        .upload-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .file-input {
+            margin: 20px 0;
+        }
+        input[type="file"] {
+            padding: 15px;
+            border: 2px dashed #4b6cb7;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin: 10px 0;
+            background: #f8f9fa;
+        }
+        .predict-btn {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.3);
+        }
+        .predict-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(75, 108, 183, 0.4);
+            background: linear-gradient(90deg, #3a5a9c, #121f38);
+        }
+        .predict-btn:active {
+            transform: translateY(-2px);
+        }
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .info-section h3 {
+            color: #4b6cb7;
+            margin-top: 0;
+        }
+        .classes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .class-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 140px;
+            text-align: center;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .class-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .class-item h4 {
+            margin: 0 0 15px 0;
+            color: #182848;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🩸 HematoVision</h1>
+            <p>Advanced Blood Cell Classification Using Transfer Learning</p>
+            <nav class="navigation">
+                <a href="/" class="nav-btn active">🏠 Home</a>
+                <a href="/about" class="nav-btn">ℹ️ About</a>
+            </nav>
+        </div>
+        
+        <div class="content">
+            <div class="upload-section">
+                <h2>Upload Blood Cell Image</h2>
+                <p>Select a blood cell image for classification</p>
+                
+                <form method="POST" enctype="multipart/form-data" action="/predict">
+                    <div class="file-input">
+                        <input type="file" name="file" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="predict-btn">🔍 Predict Cell Type</button>
+                </form>
+            </div>
+            
+            <div class="info-section">
+                <h3>🎯 Blood Cell Classes</h3>
+                <p>This system can classify blood cells into the following categories:</p>
+                <div class="classes">
+                    <div class="class-item">
+                        <h4>EOSINOPHIL</h4>
+                        <p>Granulocyte with bi-lobed nucleus</p>
+                    </div>
+                    <div class="class-item">
+                        <h4>LYMPHOCYTE</h4>
+                        <p>Small white blood cell</p>
+                    </div>
+                    <div class="class-item">
+                        <h4>MONOCYTE</h4>
+                        <p>Largest type of white blood cell</p>
+                    </div>
+                    <div class="class-item">
+                        <h4>NEUTROPHIL</h4>
+                        <p>Most abundant white blood cell</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3>💡 How It Works</h3>
+                <p>Our system uses MobileNetV2 transfer learning to analyze blood cell images with high accuracy. The model has been trained on 12,500 annotated blood cell images.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

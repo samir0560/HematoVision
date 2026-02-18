@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - HematoVision</title>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .content {
+            padding: 40px;
+        }
+        .result-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .prediction-box {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(75, 108, 183, 0.4);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        .prediction-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(75, 108, 183, 0.5);
+        }
+        .prediction-box h2 {
+            margin: 0 0 20px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .prediction-box p {
+            font-size: 1.3em;
+            margin: 0;
+            opacity: 0.9;
+        }
+        .image-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .uploaded-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-group {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .btn {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 0 15px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(75, 108, 183, 0.4);
+            background: linear-gradient(90deg, #3a5a9c, #121f38);
+        }
+        .btn:active {
+            transform: translateY(-2px);
+        }
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .info-section h3 {
+            color: #4b6cb7;
+            margin-top: 0;
+        }
+        .confidence-meter {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .confidence-level {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 10px;
+            width: 85%;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Prediction Results</h1>
+            <nav class="navigation">
+                <a href="/" class="nav-btn">🏠 Home</a>
+                <a href="/about" class="nav-btn">ℹ️ About</a>
+            </nav>
+        </div>
+        
+        <div class="content">
+            <div class="result-section">
+                <h2>Analysis Complete</h2>
+                
+                <div class="prediction-box">
+                    <h2>{{ prediction }}</h2>
+                    <p>Identified Blood Cell Type</p>
+                </div>
+                
+                {% if confidence %}
+                <div class="info-section">
+                    <h3>Confidence Level</h3>
+                    <div class="confidence-meter">
+                        <div class="confidence-level"></div>
+                    </div>
+                    <p>Confidence: {{ confidence }}%</p>
+                </div>
+                {% endif %}
+            </div>
+            
+            {% if image_path %}
+            <div class="image-section">
+                <h3>Analyzed Image</h3>
+                <img src="{{ image_path }}" alt="Uploaded blood cell" class="uploaded-image">
+            </div>
+            {% endif %}
+            
+            <div class="btn-group">
+                <a href="/" class="btn">🏠 Home</a>
+                <a href="/predict" class="btn">🔄 Analyze Another</a>
+            </div>
+            
+            <div class="info-section">
+                <h3>💡 About This Classification</h3>
+                <p>This prediction was made using our advanced MobileNetV2 transfer learning model, trained on 12,500 annotated blood cell images. The system provides accurate classification of blood cells into four main categories: Eosinophil, Lymphocyte, Monocyte, and Neutrophil.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
